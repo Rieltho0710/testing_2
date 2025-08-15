@@ -44,7 +44,7 @@
 </head>
 <body class="bg-gray-50 font-sans">
     <!-- Header & Navigation -->
-    <header class="bg-blue-700 text-white shadow-lg">
+    <header class="bg-blue-700 text-white shadow-lg relative z-50">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     
     <!-- Logo + Judul -->
@@ -63,8 +63,8 @@
 
     <!-- Auth Buttons (desktop) -->
     <div id="auth-buttons" class="hidden md:flex space-x-2">
-      <button id="btn-login" onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
-      <button id="btn-register" onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
+      <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
+      <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
     </div>
 
     <!-- User Menu (desktop) -->
@@ -92,15 +92,27 @@
   </div>
 
   <!-- Menu Mobile -->
-  <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-blue-600">
+  <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-blue-600 absolute top-full left-0 w-full">
     <a href="#home" class="hover:text-blue-200 transition">Beranda</a>
     <a href="#books" class="hover:text-blue-200 transition">Katalog</a>
     <a href="#about" class="hover:text-blue-200 transition">Tentang</a>
     <a href="#contact" class="hover:text-blue-200 transition">Kontak</a>
-    <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
-    <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
+
+    <!-- Auth (mobile) -->
+    <div id="mobile-auth" class="flex flex-col space-y-2">
+      <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
+      <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
+    </div>
+
+    <!-- User Menu (mobile) -->
+    <div id="mobile-user" class="hidden flex-col space-y-2">
+      <a href="#" class="hover:text-blue-200 transition">Dashboard</a>
+      <a href="#" class="hover:text-blue-200 transition">Riwayat</a>
+      <button onclick="logout()" class="px-3 py-1 bg-red-600 rounded hover:bg-red-800 transition">Logout</button>
+    </div>
   </div>
 </header>
+
 
 
     <!-- Main Content -->
