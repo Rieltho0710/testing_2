@@ -43,6 +43,7 @@
     
 </head>
 <body class="bg-gray-50 font-sans">
+    
     <!-- Header & Navigation -->
     <header class="bg-blue-700 text-white shadow-lg relative z-50">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -67,21 +68,6 @@
       <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
     </div>
 
-    <!-- User Menu (desktop) -->
-    <div id="user-menu" class="hidden md:flex items-center space-x-4">
-      <div class="relative">
-        <button id="user-button" class="flex items-center space-x-2">
-          <img src="images/avatar-placeholder.png" alt="Foto profil pengguna" class="w-8 h-8 rounded-full border-2 border-white">
-          <span id="username" class="font-medium"></span>
-        </button>
-        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-          <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Dashboard</a>
-          <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Riwayat</a>
-          <a href="#" onclick="logout()" class="block px-4 py-2 text-red-600 hover:bg-red-100">Logout</a>
-        </div>
-      </div>
-    </div>
-
     <!-- Tombol Hamburger (mobile) -->
     <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,29 +78,17 @@
   </div>
 
   <!-- Menu Mobile -->
-  <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-blue-600 absolute top-full left-0 w-full">
+  <div id="mobile-menu" 
+       class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-blue-600 absolute top-full left-0 w-full z-40">
     <a href="#home" class="hover:text-blue-200 transition">Beranda</a>
     <a href="#books" class="hover:text-blue-200 transition">Katalog</a>
     <a href="#about" class="hover:text-blue-200 transition">Tentang</a>
     <a href="#contact" class="hover:text-blue-200 transition">Kontak</a>
-
-    <!-- Auth (mobile) -->
-    <div id="mobile-auth" class="flex flex-col space-y-2">
-      <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
-      <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
-    </div>
-
-    <!-- User Menu (mobile) -->
-    <div id="mobile-user" class="hidden flex-col space-y-2">
-      <a href="#" class="hover:text-blue-200 transition">Dashboard</a>
-      <a href="#" class="hover:text-blue-200 transition">Riwayat</a>
-      <button onclick="logout()" class="px-3 py-1 bg-red-600 rounded hover:bg-red-800 transition">Logout</button>
-    </div>
+    <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
+    <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
   </div>
 </header>
-
-
-
+    
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
         <!-- Hero Section -->
