@@ -60,7 +60,6 @@ function logout() {
   firebase.auth().signOut();
 }
 
-
 // ---------- Auth: Login / Register / Logout ----------
 document.getElementById('login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
