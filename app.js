@@ -1,33 +1,50 @@
 // app.js - logika aplikasi: auth, UI, Firestore, charts
 
-// ---------- Modal helpers ----------
+// ---------- Modal ----------
 function showModal(id) {
   const el = document.getElementById(`${id}-modal`);
-  if (el) el.classList.remove('hidden');
+  if (el) {
+    el.classList.remove('hidden');
+
+    // Tutup modal kalau klik di luar konten
+    el.addEventListener('click', (e) => {
+      if (e.target === el) hideModal(id);
+    });
+  }
 }
+
 function hideModal(id) {
   const el = document.getElementById(`${id}-modal`);
   if (el) el.classList.add('hidden');
 }
+
 function switchToRegister() {
   hideModal('login');
   showModal('register');
 }
+
 function switchToLogin() {
   hideModal('register');
   showModal('login');
 }
 
-document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.toggle('hidden');
-});
-
-
 // ---------- Mobile menu ----------
-document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-  const m = document.getElementById('mobile-menu');
-  if (m) m.classList.toggle('hidden');
-});
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (mobileMenuBtn && mobileMenu) {
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  // Tutup menu mobile kalau klik link/menu
+  mobileMenu.querySelectorAll('a, button').forEach((el) => {
+    el.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+}
+
 
 // ---------- Auth: Login / Register / Logout ----------
 document.getElementById('login-form')?.addEventListener('submit', async (e) => {
