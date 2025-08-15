@@ -218,7 +218,30 @@
             </div>
         </section>
         <!-- User Dashboard Section (Visible when logged in) -->
-        
+       <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Perpustakaan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden-section {
+            display: none;
+        }
+        #profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        #profile-upload {
+            display: none;
+        }
+    </style>
+</head>
+<body>
     <!-- User Dashboard Section (Visible when logged in) -->
     <section id="dashboard" class="mb-16">
         <div class="flex flex-col md:flex-row">
@@ -416,6 +439,241 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // Profile image upload functionality
+        document.getElementById('profile-upload').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('profile-image').src = event.target.result;
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // Navigation functions
+        function showDashboard() {
+            hideAllSections();
+            document.getElementById('dashboard-content').classList.remove('hidden-section');
+            updateDashboardData();
+        }
+
+        function showActiveLoans() {
+            hideAllSections();
+            document.getElementById('active-loans-content').classList.remove('hidden-section');
+            loadActiveLoans();
+        }
+
+        function showLoanHistory() {
+            hideAllSections();
+            document.getElementById('loan-history-content').classList.remove('hidden-section');
+            loadLoanHistory();
+        }
+
+        function showBookReviews() {
+            hideAllSections();
+            document.getElementById('book-reviews-content').classList.remove('hidden-section');
+            loadBookReviews();
+        }
+
+        function showAccountSettings() {
+            hideAllSections();
+            document.getElementById('account-settings-content').classList.remove('hidden-section');
+        }
+
+        function hideAllSections() {
+            document.getElementById('dashboard-content').classList.add('hidden-section');
+            document.getElementById('active-loans-content').classList.add('hidden-section');
+            document.getElementById('loan-history-content').classList.add('hidden-section');
+            document.getElementById('book-reviews-content').classList.add('hidden-section');
+            document.getElementById('account-settings-content').classList.add('hidden-section');
+        }
+
+        function logout() {
+            alert('Anda telah logout');
+            // In a real app, you would redirect to login page
+        }
+
+        // Book rating system
+        function setRating(rating) {
+            const stars = document.querySelectorAll('#rating-stars span');
+            document.getElementById('review-rating').value = rating;
+            
+            stars.forEach((star, index) => {
+                star.textContent = index < rating ? '★' : '☆';
+            });
+        }
+
+        // Form submissions
+        document.getElementById('review-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Review telah dikirim!');
+            // In a real app, you would send this to your backend
+        });
+
+        document.getElementById('account-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('account-password').value;
+            const confirmPassword = document.getElementById('account-confirm-password').value;
+            
+            if (password && password !== confirmPassword) {
+                alert('Password tidak cocok!');
+                return;
+            }
+            
+            alert('Pengaturan akun telah diperbarui!');
+            // In a real app, you would send this to your backend
+        });
+
+        // Load data functions (simulated)
+        function updateDashboardData() {
+            // Simulate data loading
+            document.getElementById('member-active-loans').textContent = '2';
+            document.getElementById('member-returned').textContent = '5';
+            document.getElementById('member-fines').textContent = 'Rp 15.000';
+            
+            // Add some active loans
+            const tbody = document.getElementById('member-loans-tbody');
+            tbody.innerHTML = `
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">Laut Bercerita - Leila S. Chudori</td>
+                    <td class="py-3 px-4">15 Jan 2023</td>
+                    <td class="py-3 px-4">29 Jan 2023</td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 mr-2" onclick="extendLoan(1)">Perpanjang</button>
+                        <button class="text-green-600 hover:text-green-800" onclick="returnBook(1)">Kembalikan</button>
+                    </td>
+                </tr>
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">Bumi Manusia - Pramoedya Ananta Toer</td>
+                    <td class="py-3 px-4">20 Jan 2023</td>
+                    <td class="py-3 px-4">3 Feb 2023</td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 mr-2" onclick="extendLoan(2)">Perpanjang</button>
+                        <button class="text-green-600 hover:text-green-800" onclick="returnBook(2)">Kembalikan</button>
+                    </td>
+                </tr>
+            `;
+            
+            // Initialize chart (mock)
+            if (document.getElementById('loanChart')) {
+                // In a real app, you would use Chart.js or similar
+                console.log('Chart would be initialized here');
+            }
+        }
+
+        function loadActiveLoans() {
+            // Add all active loans with more details
+            const tbody = document.getElementById('active-loans-tbody');
+            tbody.innerHTML = `
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">Laut Bercerita - Leila S. Chudori</td>
+                    <td class="py-3 px-4">15 Jan 2023</td>
+                    <td class="py-3 px-4">29 Jan 2023</td>
+                    <td class="py-3 px-4">Aktif</td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 mr-2" onclick="extendLoan(1)">Perpanjang</button>
+                        <button class="text-green-600 hover:text-green-800" onclick="returnBook(1)">Kembalikan</button>
+                    </td>
+                </tr>
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">Bumi Manusia - Pramoedya Ananta Toer</td>
+                    <td class="py-3 px-4">20 Jan 2023</td>
+                    <td class="py-3 px-4">3 Feb 2023</td>
+                    <td class="py-3 px-4">Aktif</td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 mr-2" onclick="extendLoan(2)">Perpanjang</button>
+                        <button class="text-green-600 hover:text-green-800" onclick="returnBook(2)">Kembalikan</button>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function loadLoanHistory() {
+            // Add loan history
+            const tbody = document.getElementById('history-tbody');
+            tbody.innerHTML = `
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">Harry Potter dan Batu Bertuah - J.K. Rowling</td>
+                    <td class="py-3 px-4">1 Jan 2023</td>
+                    <td class="py-3 px-4">15 Jan 2023</td>
+                    <td class="py-3 px-4">Dikembalikan</td>
+                    <td class="py-3 px-4">Rp 0</td>
+                </tr>
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">Sapiens - Yuval Noah Harari</td>
+                    <td class="py-3 px-4">5 Dec 2022</td>
+                    <td class="py-3 px-4">10 Dec 2022</td>
+                    <td class="py-3 px-4">Dikembalikan</td>
+                    <td class="py-3 px-4">Rp 5.000</td>
+                </tr>
+                <tr class="border-b text-sm">
+                    <td class="py-3 px-4">The Lean Startup - Eric Ries</td>
+                    <td class="py-3 px-4">10 Nov 2022</td>
+                    <td class="py-3 px-4">24 Nov 2022</td>
+                    <td class="py-3 px-4">Dikembalikan</td>
+                    <td class="py-3 px-4">Rp 10.000</td>
+                </tr>
+            `;
+        }
+
+        function loadBookReviews() {
+            // Add user's book reviews
+            const container = document.getElementById('my-reviews');
+            container.innerHTML = `
+                <div class="border rounded p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-bold">Laut Bercerita - Leila S. Chudori</h4>
+                        <div class="text-yellow-400">★★★★☆</div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Buku yang sangat menyentuh, membawa pembaca ke dalam dunia yang penuh emosi dan konflik.</p>
+                    <div class="text-right">
+                        <button class="text-red-500 text-sm" onclick="deleteReview(1)">Hapus</button>
+                    </div>
+                </div>
+                <div class="border rounded p-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-bold">Sapiens - Yuval Noah Harari</h4>
+                        <div class="text-yellow-400">★★★★★</div>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Pandangan baru tentang sejarah manusia yang sangat menarik dan provokatif.</p>
+                    <div class="text-right">
+                        <button class="text-red-500 text-sm" onclick="deleteReview(2)">Hapus</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterHistory() {
+            const month = document.getElementById('history-month').value;
+            alert(`Filter akan diterapkan untuk: ${month || 'Semua waktu'}`);
+            // In a real app, you would reload data based on filter
+        }
+
+        // Action functions
+        function extendLoan(bookId) {
+            alert(`Peminjaman buku dengan ID ${bookId} akan diperpanjang`);
+            // In a real app, you would call your backend
+        }
+
+        function returnBook(bookId) {
+            alert(`Buku dengan ID ${bookId} akan dikembalikan`);
+            // In a real app, you would call your backend
+        }
+
+        function deleteReview(reviewId) {
+            if (confirm('Apakah Anda yakin ingin menghapus review ini?')) {
+                alert(`Review dengan ID ${reviewId} akan dihapus`);
+                // In a real app, you would call your backend
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showDashboard();
+        });
+    </script>
 
 
         <!-- Admin Dashboard Section (Visible when logged in as admin) -->
