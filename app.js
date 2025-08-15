@@ -41,14 +41,13 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
   e.preventDefault();
   const name = document.getElementById('register-name').value;
   const email = document.getElementById('register-email').value;
-  const nis = document.getElementById('register-nis').value;
   const kelas = document.getElementById('register-class').value;
   const password = document.getElementById('register-password').value;
   try {
     const userCred = await auth.createUserWithEmailAndPassword(email, password);
     // save additional profile to Firestore
     await db.collection('users').doc(userCred.user.uid).set({
-      name, email, nis, kelas, role: 'member', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      name, email, kelas, role: 'member', createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     hideModal('register');
   } catch (err) {
