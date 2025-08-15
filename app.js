@@ -1,21 +1,17 @@
 // app.js - logika aplikasi: auth, UI, Firestore, charts
 
-// Toggle Mobile Menu
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
+// Toggle menu mobile
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-if (mobileMenuBtn && mobileMenu) {
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-
-  // Tutup menu saat klik link
-  mobileMenu.querySelectorAll('a, button').forEach((el) => {
-    el.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
     });
-  });
-}
+  }
+});
+
 
 // Toggle Dropdown User Menu (desktop)
 const userButton = document.getElementById('user-button');
