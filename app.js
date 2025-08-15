@@ -18,6 +18,11 @@ function switchToLogin() {
   showModal('login');
 }
 
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+
+
 // ---------- Mobile menu ----------
 document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
   const m = document.getElementById('mobile-menu');
