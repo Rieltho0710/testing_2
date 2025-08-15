@@ -4,12 +4,13 @@
 // You can find these settings in the Firebase Console (Project Settings).
 
 const firebaseConfig = {
-  apiKey: "API_KEY_KAMU",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID"
+  apiKey: "AIzaSyAt8wJzeOA1Ewi8ook67NNE6_gXTJuqXxQ",
+  authDomain: "smartlib-team.firebaseapp.com",
+  projectId: "smartlib-team",
+  storageBucket: "smartlib-team.firebasestorage.app",
+  messagingSenderId: "765080868030",
+  appId: "1:765080868030:web:8905d5487ea2e01a07faef",
+  measurementId: "G-0LCPPKFPQX"
 };
 
 // Initialize Firebase (v8)
