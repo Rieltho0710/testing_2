@@ -1,34 +1,6 @@
 // app.js - logika aplikasi: auth, UI, Firestore, charts
 
-// ---------- Modal ----------
-function showModal(id) {
-  const el = document.getElementById(`${id}-modal`);
-  if (el) {
-    el.classList.remove('hidden');
-
-    // Tutup modal kalau klik di luar konten
-    el.addEventListener('click', (e) => {
-      if (e.target === el) hideModal(id);
-    });
-  }
-}
-
-function hideModal(id) {
-  const el = document.getElementById(`${id}-modal`);
-  if (el) el.classList.add('hidden');
-}
-
-function switchToRegister() {
-  hideModal('login');
-  showModal('register');
-}
-
-function switchToLogin() {
-  hideModal('register');
-  showModal('login');
-}
-
-// ---------- Mobile menu ----------
+// Toggle Mobile Menu
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
@@ -37,12 +9,55 @@ if (mobileMenuBtn && mobileMenu) {
     mobileMenu.classList.toggle('hidden');
   });
 
-  // Tutup menu mobile kalau klik link/menu
+  // Tutup menu saat klik link
   mobileMenu.querySelectorAll('a, button').forEach((el) => {
     el.addEventListener('click', () => {
       mobileMenu.classList.add('hidden');
     });
   });
+}
+
+// Toggle Dropdown User Menu (desktop)
+const userButton = document.getElementById('user-button');
+const dropdownMenu = document.getElementById('dropdown-menu');
+
+if (userButton && dropdownMenu) {
+  userButton.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('hidden');
+  });
+}
+
+// Firebase Auth Integration
+firebase.auth().onAuthStateChanged(user => {
+  const authButtons = document.getElementById('auth-buttons');
+  const userMenu = document.getElementById('user-menu');
+  const mobileAuth = document.getElementById('mobile-auth');
+  const mobileUser = document.getElementById('mobile-user');
+
+  if (user) {
+    // Tampilkan username
+    document.getElementById('username').textContent = user.displayName || "Pengguna";
+
+    // Desktop
+    authButtons.classList.add('hidden');
+    userMenu.classList.remove('hidden');
+
+    // Mobile
+    mobileAuth.classList.add('hidden');
+    mobileUser.classList.remove('hidden');
+  } else {
+    // Desktop
+    authButtons.classList.remove('hidden');
+    userMenu.classList.add('hidden');
+
+    // Mobile
+    mobileAuth.classList.remove('hidden');
+    mobileUser.classList.add('hidden');
+  }
+});
+
+function logout() {
+  firebase.auth().signOut();
 }
 
 
