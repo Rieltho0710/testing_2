@@ -218,31 +218,6 @@
             </div>
         </section>
         <!-- User Dashboard Section (Visible when logged in) -->
-       <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Perpustakaan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .hidden-section {
-            display: none;
-        }
-        #profile-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        #profile-upload {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <!-- User Dashboard Section (Visible when logged in) -->
     <section id="dashboard" class="mb-16">
         <div class="flex flex-col md:flex-row">
             <!-- Sidebar -->
@@ -262,11 +237,11 @@
                     </div>
                 </div>
                 <nav class="p-2">
-                    <a href="dashboard" onclick="showDashboard()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Dashboard</a>
-                    <a href="dashboard" onclick="showActiveLoans()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Peminjaman Aktif</a>
-                    <a href="dashboard" onclick="showLoanHistory()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Riwayat Peminjaman</a>
-                    <a href="dashboard" onclick="showBookReviews()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Review Buku</a>
-                    <a href="dashboard" onclick="showAccountSettings()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Pengaturan Akun</a>
+                    <a href="#dashboard" onclick="showDashboard()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Dashboard</a>
+                    <a href="#dashboard" onclick="showActiveLoans()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Peminjaman Aktif</a>
+                    <a href="#dashboard" onclick="showLoanHistory()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Riwayat Peminjaman</a>
+                    <a href="#dashboard" onclick="showBookReviews()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Review Buku</a>
+                    <a href="#dashboard" onclick="showAccountSettings()" class="block px-3 py-2 rounded text-gray-700 hover:bg-gray-100 mb-1">Pengaturan Akun</a>
                     <a href="#" onclick="logout()" class="block px-3 py-2 rounded text-red-600 hover:bg-red-50 mt-4">Keluar</a>
                 </nav>
             </div>
