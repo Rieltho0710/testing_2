@@ -324,27 +324,28 @@ document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
 
 // Fungsi untuk ganti section
 function showSection(sectionId, clickedLink) {
-  // Sembunyikan semua section
-  document.querySelectorAll(".hidden-section, #dashboard-content").forEach(sec => {
-    sec.classList.add("hidden");
+  // Sembunyikan semua section utama
+  document.querySelectorAll(".flex-1").forEach(sec => {
+    sec.classList.add("hidden-section");
   });
 
   // Tampilkan section yang dipilih
-  document.getElementById(sectionId)?.classList.remove("hidden");
+  document.getElementById(sectionId)?.classList.remove("hidden-section");
 
   // Reset semua link
   document.querySelectorAll("#side-nav .nav-link").forEach(link => {
-    link.classList.remove("active");
+    link.classList.remove("active", "text-blue-600", "bg-blue-50", "font-semibold");
   });
 
   // Tandai link aktif
-  clickedLink.classList.add("active");
+  clickedLink.classList.add("active", "text-blue-600", "bg-blue-50", "font-semibold");
 }
 
 // Default: tampilkan Dashboard waktu pertama kali
 document.addEventListener("DOMContentLoaded", () => {
   const firstLink = document.querySelector("#side-nav .nav-link");
   if (firstLink) {
-    showSection("dashboard-content", firstLink);
+    showSection("dashboard-section", firstLink);
   }
 });
+
