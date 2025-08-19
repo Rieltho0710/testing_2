@@ -319,3 +319,33 @@ document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
   alert('Terima kasih telah berlangganan!');
   e.target.reset();
 });
+
+// ---------- Sidebar Navigation ----------
+
+// Fungsi untuk ganti section
+function showSection(sectionId, clickedLink) {
+  // Sembunyikan semua section
+  document.querySelectorAll(".hidden-section, #dashboard-content").forEach(sec => {
+    sec.classList.add("hidden");
+  });
+
+  // Tampilkan section yang dipilih
+  document.getElementById(sectionId)?.classList.remove("hidden");
+
+  // Reset semua link
+  document.querySelectorAll("#side-nav .nav-link").forEach(link => {
+    link.classList.remove("active");
+  });
+
+  // Tandai link aktif
+  clickedLink.classList.add("active");
+}
+
+// Default: tampilkan Dashboard waktu pertama kali
+document.addEventListener("DOMContentLoaded", () => {
+  const firstLink = document.querySelector("#side-nav .nav-link");
+  if (firstLink) {
+    showSection("dashboard-content", firstLink);
+  }
+});
+
