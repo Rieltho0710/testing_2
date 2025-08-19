@@ -258,171 +258,172 @@
             </div>
 
             <!-- Main Content - Dashboard -->
-            <div id="dashboard-content" class="flex-1 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-xl font-bold mb-6">Dashboard Anggota</h2>
+<div id="dashboard-section" class="flex-1 bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-xl font-bold mb-6">Dashboard Anggota</h2>
 
-                <div class="grid md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <p class="text-sm text-gray-600 mb-1">Peminjaman Aktif</p>
-                        <p class="text-2xl font-bold" id="member-active-loans">0</p>
-                    </div>
-                    <div class="bg-green-50 p-4 rounded-lg">
-                        <p class="text-sm text-gray-600 mb-1">Buku Dikembalikan</p>
-                        <p class="text-2xl font-bold" id="member-returned">0</p>
-                    </div>
-                    <div class="bg-yellow-50 p-4 rounded-lg">
-                        <p class="text-sm text-gray-600 mb-1">Denda Tertunda</p>
-                        <p class="text-2xl font-bold" id="member-fines">Rp 0</p>
-                    </div>
-                </div>
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-blue-50 p-4 rounded-lg">
+            <p class="text-sm text-gray-600 mb-1">Peminjaman Aktif</p>
+            <p class="text-2xl font-bold" id="member-active-loans">0</p>
+        </div>
+        <div class="bg-green-50 p-4 rounded-lg">
+            <p class="text-sm text-gray-600 mb-1">Buku Dikembalikan</p>
+            <p class="text-2xl font-bold" id="member-returned">0</p>
+        </div>
+        <div class="bg-yellow-50 p-4 rounded-lg">
+            <p class="text-sm text-gray-600 mb-1">Denda Tertunda</p>
+            <p class="text-2xl font-bold" id="member-fines">Rp 0</p>
+        </div>
+    </div>
 
-                <h3 class="font-bold mb-4">Peminjaman Aktif</h3>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white">
-                        <thead>
-                            <tr class="bg-gray-100 text-gray-600 text-sm">
-                                <th class="py-3 px-4 text-left">Buku</th>
-                                <th class="py-3 px-4 text-left">Tanggal Pinjam</th>
-                                <th class="py-3 px-4 text-left">Jatuh Tempo</th>
-                                <th class="py-3 px-4 text-left">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="member-loans-tbody">
-                            <!-- Data akan dimasukkan melalui JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
+    <h3 class="font-bold mb-4">Peminjaman Aktif</h3>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr class="bg-gray-100 text-gray-600 text-sm">
+                    <th class="py-3 px-4 text-left">Buku</th>
+                    <th class="py-3 px-4 text-left">Tanggal Pinjam</th>
+                    <th class="py-3 px-4 text-left">Jatuh Tempo</th>
+                    <th class="py-3 px-4 text-left">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="member-loans-tbody">
+                <!-- Data akan dimasukkan melalui JavaScript -->
+            </tbody>
+        </table>
+    </div>
 
-                <div class="mt-8">
-                    <h3 class="font-bold mb-4">Statistik Peminjaman</h3>
-                    <div class="bg-white p-4 rounded-lg border">
-                        <canvas id="loanChart" height="300"></canvas>
-                    </div>
-                </div>
+    <div class="mt-8">
+        <h3 class="font-bold mb-4">Statistik Peminjaman</h3>
+        <div class="bg-white p-4 rounded-lg border">
+            <canvas id="loanChart" height="300"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Peminjaman Aktif Section -->
+<div id="active-loans-section" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
+    <h2 class="text-xl font-bold mb-6">Peminjaman Aktif</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr class="bg-gray-100 text-gray-600 text-sm">
+                    <th class="py-3 px-4 text-left">Buku</th>
+                    <th class="py-3 px-4 text-left">Tanggal Pinjam</th>
+                    <th class="py-3 px-4 text-left">Jatuh Tempo</th>
+                    <th class="py-3 px-4 text-left">Status</th>
+                    <th class="py-3 px-4 text-left">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="active-loans-tbody">
+                <!-- Data akan dimasukkan melalui JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Riwayat Peminjaman Section -->
+<div id="loan-history-section" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
+    <h2 class="text-xl font-bold mb-6">Riwayat Peminjaman</h2>
+    <div class="mb-4 flex justify-between items-center">
+        <div class="flex space-x-2">
+            <input type="month" id="history-month" class="border rounded p-1">
+            <button onclick="filterHistory()" class="bg-blue-500 text-white px-3 py-1 rounded">Filter</button>
+        </div>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr class="bg-gray-100 text-gray-600 text-sm">
+                    <th class="py-3 px-4 text-left">Buku</th>
+                    <th class="py-3 px-4 text-left">Tanggal Pinjam</th>
+                    <th class="py-3 px-4 text-left">Tanggal Kembali</th>
+                    <th class="py-3 px-4 text-left">Status</th>
+                    <th class="py-3 px-4 text-left">Denda</th>
+                </tr>
+            </thead>
+            <tbody id="history-tbody">
+                <!-- Data akan dimasukkan melalui JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Review Buku Section -->
+<div id="book-reviews-section" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
+    <h2 class="text-xl font-bold mb-6">Review Buku</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+        <div>
+            <h3 class="font-bold mb-4">Review Saya</h3>
+            <div id="my-reviews" class="space-y-4">
+                <!-- Reviews akan dimasukkan melalui JavaScript -->
             </div>
-
-            <!-- Peminjaman Aktif Section -->
-            <div id="active-loans-content" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
-                <h2 class="text-xl font-bold mb-6">Peminjaman Aktif</h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white">
-                        <thead>
-                            <tr class="bg-gray-100 text-gray-600 text-sm">
-                                <th class="py-3 px-4 text-left">Buku</th>
-                                <th class="py-3 px-4 text-left">Tanggal Pinjam</th>
-                                <th class="py-3 px-4 text-left">Jatuh Tempo</th>
-                                <th class="py-3 px-4 text-left">Status</th>
-                                <th class="py-3 px-4 text-left">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="active-loans-tbody">
-                            <!-- Data akan dimasukkan melalui JavaScript -->
-                        </tbody>
-                    </table>
+        </div>
+        <div>
+            <h3 class="font-bold mb-4">Beri Review Baru</h3>
+            <form id="review-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Buku</label>
+                    <select id="review-book" class="w-full border rounded p-2">
+                        <option value="">-- Pilih Buku --</option>
+                        <option value="1">Laut Bercerita - Leila S. Chudori</option>
+                        <option value="2">Bumi Manusia - Pramoedya Ananta Toer</option>
+                        <option value="3">Harry Potter dan Batu Bertuah - J.K. Rowling</option>
+                    </select>
                 </div>
-            </div>
-
-            <!-- Riwayat Peminjaman Section -->
-            <div id="loan-history-content" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
-                <h2 class="text-xl font-bold mb-6">Riwayat Peminjaman</h2>
-                <div class="mb-4 flex justify-between items-center">
-                    <div class="flex space-x-2">
-                        <input type="month" id="history-month" class="border rounded p-1">
-                        <button onclick="filterHistory()" class="bg-blue-500 text-white px-3 py-1 rounded">Filter</button>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
+                    <div class="flex items-center" id="rating-stars">
+                        <span class="text-2xl cursor-pointer" onclick="setRating(1)">☆</span>
+                        <span class="text-2xl cursor-pointer" onclick="setRating(2)">☆</span>
+                        <span class="text-2xl cursor-pointer" onclick="setRating(3)">☆</span>
+                        <span class="text-2xl cursor-pointer" onclick="setRating(4)">☆</span>
+                        <span class="text-2xl cursor-pointer" onclick="setRating(5)">☆</span>
                     </div>
+                    <input type="hidden" id="review-rating" value="0">
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white">
-                        <thead>
-                            <tr class="bg-gray-100 text-gray-600 text-sm">
-                                <th class="py-3 px-4 text-left">Buku</th>
-                                <th class="py-3 px-4 text-left">Tanggal Pinjam</th>
-                                <th class="py-3 px-4 text-left">Tanggal Kembali</th>
-                                <th class="py-3 px-4 text-left">Status</th>
-                                <th class="py-3 px-4 text-left">Denda</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-tbody">
-                            <!-- Data akan dimasukkan melalui JavaScript -->
-                        </tbody>
-                    </table>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Komentar</label>
+                    <textarea id="review-comment" rows="4" class="w-full border rounded p-2"></textarea>
                 </div>
-            </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit Review</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-            <!-- Review Buku Section -->
-            <div id="book-reviews-content" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
-                <h2 class="text-xl font-bold mb-6">Review Buku</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="font-bold mb-4">Review Saya</h3>
-                        <div id="my-reviews" class="space-y-4">
-                            <!-- Reviews akan dimasukkan melalui JavaScript -->
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="font-bold mb-4">Beri Review Baru</h3>
-                        <form id="review-form" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Buku</label>
-                                <select id="review-book" class="w-full border rounded p-2">
-                                    <option value="">-- Pilih Buku --</option>
-                                    <option value="1">Laut Bercerita - Leila S. Chudori</option>
-                                    <option value="2">Bumi Manusia - Pramoedya Ananta Toer</option>
-                                    <option value="3">Harry Potter dan Batu Bertuah - J.K. Rowling</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-                                <div class="flex items-center" id="rating-stars">
-                                    <span class="text-2xl cursor-pointer" onclick="setRating(1)">☆</span>
-                                    <span class="text-2xl cursor-pointer" onclick="setRating(2)">☆</span>
-                                    <span class="text-2xl cursor-pointer" onclick="setRating(3)">☆</span>
-                                    <span class="text-2xl cursor-pointer" onclick="setRating(4)">☆</span>
-                                    <span class="text-2xl cursor-pointer" onclick="setRating(5)">☆</span>
-                                </div>
-                                <input type="hidden" id="review-rating" value="0">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Komentar</label>
-                                <textarea id="review-comment" rows="4" class="w-full border rounded p-2"></textarea>
-                            </div>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit Review</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<!-- Pengaturan Akun Section -->
+<div id="account-settings-section" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
+    <h2 class="text-xl font-bold mb-6">Pengaturan Akun</h2>
+    <form id="account-form" class="space-y-4 max-w-lg">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+            <input type="text" id="account-name" class="w-full border rounded p-2" value="Anggota Perpustakaan">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="account-email" class="w-full border rounded p-2" value="anggota@example.com">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
+            <input type="tel" id="account-phone" class="w-full border rounded p-2" value="08123456789">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
+            <textarea id="account-address" rows="3" class="w-full border rounded p-2">Jl. Contoh No. 123, Kota</textarea>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Password (biarkan kosong jika tidak ingin mengubah)</label>
+            <input type="password" id="account-password" class="w-full border rounded p-2" placeholder="Password baru">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password</label>
+            <input type="password" id="account-confirm-password" class="w-full border rounded p-2" placeholder="Konfirmasi password baru">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan Perubahan</button>
+    </form>
+</div>
 
-            <!-- Pengaturan Akun Section -->
-            <div id="account-settings-content" class="flex-1 bg-white rounded-lg shadow-md p-6 hidden-section">
-                <h2 class="text-xl font-bold mb-6">Pengaturan Akun</h2>
-                <form id="account-form" class="space-y-4 max-w-lg">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                        <input type="text" id="account-name" class="w-full border rounded p-2" value="Anggota Perpustakaan">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="account-email" class="w-full border rounded p-2" value="anggota@example.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
-                        <input type="tel" id="account-phone" class="w-full border rounded p-2" value="08123456789">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
-                        <textarea id="account-address" rows="3" class="w-full border rounded p-2">Jl. Contoh No. 123, Kota</textarea>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Password (biarkan kosong jika tidak ingin mengubah)</label>
-                        <input type="password" id="account-password" class="w-full border rounded p-2" placeholder="Password baru">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password</label>
-                        <input type="password" id="account-confirm-password" class="w-full border rounded p-2" placeholder="Konfirmasi password baru">
-                    </div>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan Perubahan</button>
-                </form>
-            </div>
         </div>
     </section>
 
