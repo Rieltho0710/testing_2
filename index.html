@@ -247,14 +247,14 @@
                         </div>
                     </div>
                 </div>
-                <nav class="p-2">
-                    <a href="#dashboard" onclick="showDashboard()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Dashboard</a>
-                    <a href="#dashboard" onclick="showActiveLoans()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Peminjaman Aktif</a>
-                    <a href="#dashboard" onclick="showLoanHistory()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Riwayat Peminjaman</a>
-                    <a href="#dashboard" onclick="showBookReviews()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Review Buku</a>
-                    <a href="#dashboard" onclick="showAccountSettings()" class="block px-3 py-2 rounded text-blue-600 bg-blue-50 mb-1">Pengaturan Akun</a>
-                    <a href="#" onclick="logout()" class="block px-3 py-2 rounded text-red-600 hover:bg-red-50 mt-4">Keluar</a>
-                </nav>
+                <nav id="side-nav" class="p-2">
+                     <a href="#dashboard" onclick="showSection('dashboard-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Dashboard</a>
+                     <a href="#active-loans" onclick="showSection('active-loans-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Peminjaman Aktif</a>
+                     <a href="#loan-history" onclick="showSection('loan-history-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Riwayat Peminjaman</a>
+                     <a href="#book-reviews" onclick="showSection('book-reviews-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Review Buku</a>
+                     <a href="#account-settings" onclick="showSection('account-settings-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Pengaturan Akun</a>
+                     <a href="#" onclick="logout()" class="block px-3 py-2 rounded text-red-600 hover:bg-red-50 mt-4">Keluar</a>
+               </nav>
             </div>
 
             <!-- Main Content - Dashboard -->
