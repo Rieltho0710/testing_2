@@ -5,7 +5,6 @@ function showModal(id) {
   const el = document.getElementById(`${id}-modal`);
   if (el) {
     el.classList.remove('hidden');
-
     // Tutup modal kalau klik di luar konten
     el.addEventListener('click', (e) => {
       if (e.target === el) hideModal(id);
@@ -45,7 +44,7 @@ if (mobileMenuBtn && mobileMenu) {
   });
 }
 
-// Firebase Auth Integration
+// ---------- Firebase Auth Integration ----------
 firebase.auth().onAuthStateChanged(user => {
   const authButtons = document.getElementById('auth-buttons');
   const userMenu = document.getElementById('user-menu');
@@ -57,28 +56,25 @@ firebase.auth().onAuthStateChanged(user => {
     document.getElementById('username').textContent = user.displayName || "Pengguna";
 
     // Desktop
-    authButtons.classList.add('hidden');
-    userMenu.classList.remove('hidden');
+    authButtons?.classList.add('hidden');
+    userMenu?.classList.remove('hidden');
 
     // Mobile
-    mobileAuth.classList.add('hidden');
-    mobileUser.classList.remove('hidden');
+    mobileAuth?.classList.add('hidden');
+    mobileUser?.classList.remove('hidden');
   } else {
-    // Desktop
-    authButtons.classList.remove('hidden');
-    userMenu.classList.add('hidden');
-
-    // Mobile
-    mobileAuth.classList.remove('hidden');
-    mobileUser.classList.add('hidden');
+    authButtons?.classList.remove('hidden');
+    userMenu?.classList.add('hidden');
+    mobileAuth?.classList.remove('hidden');
+    mobileUser?.classList.add('hidden');
   }
 });
 
-function logout() {
-  firebase.auth().signOut();
+async function logout() {
+  await auth.signOut();
 }
 
-// ---------- Auth: Login / Register / Logout ----------
+// ---------- Auth: Login / Register ----------
 document.getElementById('login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('login-email').value;
@@ -99,7 +95,6 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
   const password = document.getElementById('register-password').value;
   try {
     const userCred = await auth.createUserWithEmailAndPassword(email, password);
-    // save additional profile to Firestore
     await db.collection('users').doc(userCred.user.uid).set({
       name, email, kelas, role: 'member', createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
@@ -109,10 +104,6 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
   }
 });
 
-async function logout() {
-  await auth.signOut();
-}
-
 // ---------- Auth state handling ----------
 auth.onAuthStateChanged(async (user) => {
   const authButtons = document.getElementById('auth-buttons');
@@ -121,34 +112,31 @@ auth.onAuthStateChanged(async (user) => {
   const adminDashboard = document.getElementById('admin-dashboard');
 
   if (user) {
-    // show user menu / hide auth buttons
-    if (authButtons) authButtons.classList.add('hidden');
-    if (userMenu) userMenu.classList.remove('hidden');
+    authButtons?.classList.add('hidden');
+    userMenu?.classList.remove('hidden');
     document.getElementById('username').innerText = user.email.split('@')[0];
 
-    // load user profile to determine role
     const doc = await db.collection('users').doc(user.uid).get();
     const profile = doc.exists ? doc.data() : null;
     const role = profile?.role || 'member';
 
     if (role === 'admin') {
-      if (adminDashboard) adminDashboard.classList.remove('hidden');
-      if (dashboard) dashboard.classList.add('hidden');
+      adminDashboard?.classList.remove('hidden');
+      dashboard?.classList.add('hidden');
     } else {
-      if (dashboard) dashboard.classList.remove('hidden');
-      if (adminDashboard) adminDashboard.classList.add('hidden');
+      dashboard?.classList.remove('hidden');
+      adminDashboard?.classList.add('hidden');
       document.getElementById('dashboard-username').innerText = profile?.name || user.email;
     }
   } else {
-    // not logged in
-    if (authButtons) authButtons.classList.remove('hidden');
-    if (userMenu) userMenu.classList.add('hidden');
-    if (dashboard) dashboard.classList.add('hidden');
-    if (adminDashboard) adminDashboard.classList.add('hidden');
+    authButtons?.classList.remove('hidden');
+    userMenu?.classList.add('hidden');
+    dashboard?.classList.add('hidden');
+    adminDashboard?.classList.add('hidden');
   }
 });
 
-// ---------- Load books from Firestore and render ----------
+// ---------- Load books ----------
 let allBooks = [];
 function renderBooks(list) {
   const container = document.getElementById('book-list');
@@ -177,7 +165,6 @@ function renderBooks(list) {
     `;
     container.appendChild(el);
 
-    // lazy-load image fade-in
     const img = el.querySelector('img');
     if (img) {
       img.addEventListener('load', () => img.classList.add('loaded'));
@@ -190,17 +177,7 @@ function loadBooks() {
     allBooks = [];
     snap.forEach(doc => {
       const d = doc.data();
-      allBooks.push({
-        id: doc.id,
-        title: d.title,
-        author: d.author,
-        category: d.category,
-        description: d.description,
-        image: d.image,
-        stock: d.stock || 0,
-        reviews: d.reviews || 0,
-        createdAt: d.createdAt
-      });
+      allBooks.push({ id: doc.id, ...d, stock: d.stock || 0, reviews: d.reviews || 0 });
     });
     renderBooks(allBooks.slice(0,12));
     updateStats();
@@ -209,12 +186,9 @@ function loadBooks() {
 loadBooks();
 
 // ---------- Filter & Search ----------
-document.getElementById('filter-category')?.addEventListener('change', (e) => {
-  applyFilters();
-});
-document.getElementById('search-book')?.addEventListener('input', (e) => {
-  applyFilters();
-});
+document.getElementById('filter-category')?.addEventListener('change', applyFilters);
+document.getElementById('search-book')?.addEventListener('input', applyFilters);
+
 function applyFilters() {
   const cat = document.getElementById('filter-category')?.value || '';
   const q = (document.getElementById('search-book')?.value || '').toLowerCase();
@@ -243,7 +217,6 @@ function openBookDetail(id) {
   showModal('book-detail');
 }
 
-// Borrow button (requires auth)
 document.getElementById('btn-borrow')?.addEventListener('click', async () => {
   if (!auth.currentUser) {
     alert('Silakan login terlebih dahulu untuk meminjam buku.');
@@ -253,7 +226,6 @@ document.getElementById('btn-borrow')?.addEventListener('click', async () => {
   if (currentBook.stock <= 0) { alert('Stok buku tidak mencukupi.'); return; }
 
   try {
-    // create a loan transaction (simple example)
     await db.collection('loans').add({
       userId: auth.currentUser.uid,
       bookId: currentBook.id,
@@ -268,7 +240,7 @@ document.getElementById('btn-borrow')?.addEventListener('click', async () => {
   }
 });
 
-// ---------- Simple Charts (dummy data initially, can be replaced with Firestore queries) ----------
+// ---------- Charts ----------
 function renderLoanChart() {
   const ctx = document.getElementById('loanChart')?.getContext('2d');
   if (!ctx) return;
@@ -302,13 +274,12 @@ function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, function (m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]); });
 }
 
-// ---------- Stats updater (basic) ----------
+// ---------- Stats ----------
 function updateStats() {
   document.getElementById('stat-books').innerText = (allBooks.length || 0) + '+';
-  // members & loans could be loaded from Firestore counters; left as example
 }
 
-// ---------- Contact & Newsletter handlers (basic) ----------
+// ---------- Forms ----------
 document.getElementById('contact-form')?.addEventListener('submit', (e) => {
   e.preventDefault();
   alert('Pesan terkirim. Terima kasih!');
@@ -321,31 +292,20 @@ document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
 });
 
 // ---------- Sidebar Navigation ----------
-
-// Fungsi untuk ganti section
 function showSection(sectionId, clickedLink) {
-  // Sembunyikan semua section utama
   document.querySelectorAll(".flex-1").forEach(sec => {
     sec.classList.add("hidden-section");
   });
-
-  // Tampilkan section yang dipilih
   document.getElementById(sectionId)?.classList.remove("hidden-section");
-
-  // Reset semua link
   document.querySelectorAll("#side-nav .nav-link").forEach(link => {
     link.classList.remove("active", "text-blue-600", "bg-blue-50", "font-semibold");
   });
-
-  // Tandai link aktif
   clickedLink.classList.add("active", "text-blue-600", "bg-blue-50", "font-semibold");
 }
 
-// Default: tampilkan Dashboard waktu pertama kali
 document.addEventListener("DOMContentLoaded", () => {
   const firstLink = document.querySelector("#side-nav .nav-link");
   if (firstLink) {
     showSection("dashboard-section", firstLink);
   }
 });
-
