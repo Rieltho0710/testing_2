@@ -348,4 +348,3 @@ document.addEventListener("DOMContentLoaded", () => {
     showSection("dashboard-content", firstLink);
   }
 });
-
