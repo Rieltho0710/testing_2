@@ -40,6 +40,17 @@
             display: none;
         }
     </style>
+
+    <style>
+  .nav-link.active {
+    background-color: #2563eb;
+    color: white;
+  }
+  .hidden-section {
+    display: none;
+  }
+</style>
+
     
 </head>
 <body class="bg-gray-50 font-sans">
@@ -248,13 +259,13 @@
                     </div>
                 </div>
                 <nav id="side-nav" class="p-2">
-                     <a href="#dashboard" onclick="showSection('dashboard-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Dashboard</a>
-                     <a href="#active-loans" onclick="showSection('active-loans-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Peminjaman Aktif</a>
-                     <a href="#loan-history" onclick="showSection('loan-history-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Riwayat Peminjaman</a>
-                     <a href="#book-reviews" onclick="showSection('book-reviews-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Review Buku</a>
-                     <a href="#account-settings" onclick="showSection('account-settings-content', this)" class="nav-link block px-3 py-2 rounded mb-1">Pengaturan Akun</a>
-                     <a href="#" onclick="logout()" class="block px-3 py-2 rounded text-red-600 hover:bg-red-50 mt-4">Keluar</a>
-               </nav>
+                    <a href="#dashboard" onclick="showSection('dashboard-section', this)" class="nav-link block px-3 py-2 rounded mb-1">Dashboard</a>
+                    <a href="#active-loans" onclick="showSection('active-loans-section', this)" class="nav-link block px-3 py-2 rounded mb-1">Peminjaman Aktif</a>
+                    <a href="#loan-history" onclick="showSection('loan-history-section', this)" class="nav-link block px-3 py-2 rounded mb-1">Riwayat Peminjaman</a>
+                    <a href="#book-reviews" onclick="showSection('book-reviews-section', this)" class="nav-link block px-3 py-2 rounded mb-1">Review Buku</a>
+                    <a href="#account-settings" onclick="showSection('account-settings-section', this)" class="nav-link block px-3 py-2 rounded mb-1">Pengaturan Akun</a>
+                    <a href="#" onclick="logout()" class="block px-3 py-2 rounded text-red-600 hover:bg-red-50 mt-4">Keluar</a>
+              </nav>
             </div>
 
             <!-- Main Content - Dashboard -->
