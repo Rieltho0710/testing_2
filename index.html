@@ -43,63 +43,62 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
-    
-    <!-- Header & Navigation Utama (Perpustakaan Digital) -->
-<header class="bg-blue-700 text-white shadow-lg">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <!-- Logo + Judul -->
-        <div class="flex items-center space-x-2">
-            <img src="images/logo-placeholder.png" alt="Logo Perpustakaan Digital" class="h-10 rounded">
-            <h1 class="text-xl md:text-2xl font-bold">Perpustakaan Digital</h1>
+<!-- Header & Navigation -->
+    <header class="bg-blue-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo + Judul -->
+            <div class="flex items-center space-x-2">
+                <img src="images/logo-placeholder.png" alt="Logo Perpustakaan Digital" class="h-10 rounded">
+                <h1 class="text-xl md:text-2xl font-bold">Perpustakaan Digital</h1>
+            </div>
+
+            <!-- Menu Desktop -->
+            <nav id="nav-links" class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-blue-200 transition">Beranda</a>
+                <a href="#books" class="hover:text-blue-200 transition">Katalog</a>
+                <a href="#about" class="hover:text-blue-200 transition">Tentang</a>
+                <a href="#contact" class="hover:text-blue-200 transition">Kontak</a>
+            </nav>
+
+            <!-- Auth Buttons (desktop) -->
+            <div id="auth-buttons" class="hidden md:flex space-x-2">
+                <button id="btn-login" onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
+                <button id="btn-register" onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
+            </div>
+
+            <!-- User Menu (desktop) -->
+            <div id="user-menu" class="hidden md:flex items-center space-x-4">
+                <div class="relative">
+                    <button id="user-button" class="flex items-center space-x-2">
+                        <img src="images/avatar-placeholder.png" alt="Foto profil pengguna" class="w-8 h-8 rounded-full border-2 border-white">
+                        <span id="username" class="font-medium"></span>
+                    </button>
+                    <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Dashboard</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Riwayat</a>
+                        <a href="#" onclick="logout()" class="block px-4 py-2 text-red-600 hover:bg-red-100">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Hamburger (mobile) -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
 
-        <!-- Menu Desktop -->
-        <nav id="nav-links" class="hidden md:flex space-x-6">
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-blue-600">
             <a href="#home" class="hover:text-blue-200 transition">Beranda</a>
             <a href="#books" class="hover:text-blue-200 transition">Katalog</a>
             <a href="#about" class="hover:text-blue-200 transition">Tentang</a>
             <a href="#contact" class="hover:text-blue-200 transition">Kontak</a>
-        </nav>
-
-        <!-- Auth Buttons (desktop) -->
-        <div id="auth-buttons" class="hidden md:flex space-x-2">
-            <button id="btn-login" onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
-            <button id="btn-register" onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
+            <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
+            <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
         </div>
-
-        <!-- User Menu (desktop) -->
-        <div id="user-menu" class="hidden md:flex items-center space-x-4">
-            <div class="relative">
-                <button id="user-button" class="flex items-center space-x-2">
-                    <img src="images/avatar-placeholder.png" alt="Foto profil pengguna" class="w-8 h-8 rounded-full border-2 border-white">
-                    <span id="username" class="font-medium"></span>
-                </button>
-                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Dashboard</a>
-                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Riwayat</a>
-                    <a href="#" onclick="logout()" class="block px-4 py-2 text-red-600 hover:bg-red-100">Logout</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tombol Hamburger (mobile) -->
-        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
-    </div>
-
-    <!-- Menu Mobile -->
-    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-blue-600">
-        <a href="#home" class="hover:text-blue-200 transition">Beranda</a>
-        <a href="#books" class="hover:text-blue-200 transition">Katalog</a>
-        <a href="#about" class="hover:text-blue-200 transition">Tentang</a>
-        <a href="#contact" class="hover:text-blue-200 transition">Kontak</a>
-        <button onclick="showModal('login')" class="px-3 py-1 bg-white text-blue-700 rounded hover:bg-blue-100 transition">Login</button>
-        <button onclick="showModal('register')" class="px-3 py-1 bg-blue-600 rounded hover:bg-blue-800 transition">Daftar</button>
-    </div>
-</header>
+    </header>
 
 <!-- Header & Navigation Perpustakaan SMA 3 Manado -->
 <header class="bg-white shadow-md mt-4">
